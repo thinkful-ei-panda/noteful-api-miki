@@ -75,8 +75,8 @@ describe(`Folders Endpoints`, () => {
                     .expect(201)
                     .expect(res => {
                         // Test location 2 ways
-                        expect(res.headers.location).to.equal(`/api/1`)
-                        expect('location', `/api/1`)
+                        expect(res.headers.location).to.equal(`/api/folders/1`)
+                        expect('location', `/api/folders/1`)
                     });
             });
         });

@@ -11,10 +11,10 @@ const NotesService = {
             .first();
     },
 
-    // insertNewNote(db, note_name) {
-    //     return db('note')
-    //         .insert({note_name}, ['id']);
-    // },
+    insertNewNote(db, newNote) {
+        return db('note')
+            .insert(newNote, ['id']);
+    },
 
     // updateNote(db, id, note_name) {
     //     return db('note')

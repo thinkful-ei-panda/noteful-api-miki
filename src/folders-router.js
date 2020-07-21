@@ -39,7 +39,7 @@ foldersRouter
                 const { id: folder_id } = folder[0];
                 res
                     .status(201)
-                    .location(`/api/${folder_id}`)
+                    .location(`/api/folders/${folder_id}`)
                     .end();
             })
             .catch(next);

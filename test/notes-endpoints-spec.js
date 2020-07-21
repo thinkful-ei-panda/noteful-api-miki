@@ -60,26 +60,31 @@ describe.only(`Notes Endpoints`, () => {
         });
     });
 
-    // describe(`POST /api/notes`, () => {
-    //     context(`Given there are no notes`, () => {
-    //         it(`POST /api/notes responds with 201 and new note location`, () => {
-    //             const newNote = {
-    //                 folder_name: 'Blimey'
-    //             };
+    describe(`POST /api/notes`, () => {
+        const testFoldersArray = makeFoldersArray();
+        beforeEach(`Insert folders`, () => db('folder').insert(testFoldersArray));
 
-    //             return supertest(app)
-    //                 .post(`/api/folders`)
-    //                 .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-    //                 .send(newFolder)
-    //                 .expect(201)
-    //                 .expect(res => {
-    //                     // Test location 2 ways
-    //                     expect(res.headers.location).to.equal(`/api/1`)
-    //                     expect('location', `/api/1`)
-    //                 });
-    //         });
-    //     });
-    // });
+        context(`Given there are no notes`, () => {
+            it(`POST /api/notes responds with 201 and new note location`, () => {
+                const newNote = {
+                    note_name: 'Sheep',
+                    note_content: 'Four legs good, two legs baaaaad',
+                    folder_name: 3
+                };
+
+                return supertest(app)
+                    .post(`/api/notes`)
+                    .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+                    .send(newNote)
+                    .expect(201)
+                    .expect(res => {
+                        // Test location 2 ways
+                        expect(res.headers.location).to.equal(`/api/notes/1`)
+                        expect('location', `/api/notes/1`)
+                    });
+            });
+        });
+    });
 
     // describe(`PATCH /api/folders/:folder_id`, () => {
     //     context(`Given there are folders`, () => {

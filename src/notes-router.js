@@ -24,26 +24,30 @@ notesRouter
             })
             .catch(next);
     })
-    // .post((req, res, next) => {
-    //     const knexInstance = req.app.get('db');
-    //     const { folder_name } = req.body;
+    .post((req, res, next) => {
+        const knexInstance = req.app.get('db');
+        const { note_name, note_content, folder_name } = req.body;
+        const newNote = { note_name, note_content, folder_name };
 
-    //     if(folder_name.length === 0) {
-    //         return res.status(400).send('Please enter a valid folder name');
-    //     };
+        // On client side, folder_name has a default value
+        // note_content not required
 
-    //     FoldersService.insertNewFolder(knexInstance, folder_name)
-    //         .then(folder => {
-    //             // Returns folder array with ID object
-    //             // Deconstruct array
-    //             const { id: folder_id } = folder[0];
-    //             res
-    //                 .status(201)
-    //                 .location(`/api/${folder_id}`)
-    //                 .end();
-    //         })
-    //         .catch(next);
-    // })
+        if (!note_name.length) {
+            return res.status(400).send('Please enter a valid note name');
+        }
+
+        NotesService.insertNewNote(knexInstance, newNote)
+            .then(note => {
+                // Returns folder array with ID object
+                // Deconstruct array
+                const { id: note_id } = note[0];
+                res
+                    .status(201)
+                    .location(`/api/notes/${note_id}`)
+                    .end();
+            })
+            .catch(next);
+    });
 
 notesRouter
     .route('/:note_id')
