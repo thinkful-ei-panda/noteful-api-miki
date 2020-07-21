@@ -92,7 +92,7 @@ foldersRouter
                 if(!folder) {
                     return res.status(404).json({error: {message: 'Folder not found/does not exist'}});
                 };
-                res.json()
+                res.status(204).end();
             })
             .catch(next);
     })

@@ -99,7 +99,7 @@ notesRouter
                 if(!note) {
                     return res.status(404).json({error: {message: 'Note not found/does not exist'}});
                 };
-                res.json(note)
+                res.status(204).end();
             })
             .catch(next);
     });
