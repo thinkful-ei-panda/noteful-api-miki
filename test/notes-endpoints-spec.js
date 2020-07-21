@@ -136,7 +136,7 @@ describe(`Notes Endpoints`, () => {
                 return supertest(app)
                     .delete(`/api/notes/${note_id}`)
                     .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-                    .expect(200)
+                    .expect(204)
                     .then(res => {
                         return supertest(app)
                             .get('/api/notes')
