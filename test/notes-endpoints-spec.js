@@ -3,7 +3,7 @@ const app = require('../src/app');
 const { makeFoldersArray, makeNotesArray } = require('./noteful-fixtures');
 const { expect } = require('chai');
 
-describe.only(`Notes Endpoints`, () => {
+describe(`Notes Endpoints`, () => {
     let db;
 
     before(`Make a connection`, () => {

@@ -13,7 +13,7 @@ const NotesService = {
 
     insertNewNote(db, newNote) {
         return db('note')
-            .insert(newNote, ['id']);
+            .insert(newNote, ['*']);
     },
 
     updateNote(db, id, noteUpdate) {

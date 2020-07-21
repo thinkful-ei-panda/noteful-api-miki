@@ -44,7 +44,7 @@ notesRouter
                 res
                     .status(201)
                     .location(`/api/notes/${note_id}`)
-                    .end();
+                    .json(note);
             })
             .catch(next);
     });
@@ -99,7 +99,7 @@ notesRouter
                 if(!note) {
                     return res.status(404).json({error: {message: 'Note not found/does not exist'}});
                 };
-                res.status(200).end();
+                res.json(note)
             })
             .catch(next);
     });

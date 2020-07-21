@@ -40,7 +40,7 @@ foldersRouter
                 res
                     .status(201)
                     .location(`/api/folders/${folder_id}`)
-                    .end();
+                    .json(folder);
             })
             .catch(next);
     })
@@ -92,7 +92,7 @@ foldersRouter
                 if(!folder) {
                     return res.status(404).json({error: {message: 'Folder not found/does not exist'}});
                 };
-                res.status(200).end();
+                res.json()
             })
             .catch(next);
     })

@@ -13,7 +13,7 @@ const FoldersService = {
 
     insertNewFolder(db, folder_name) {
         return db('folder')
-            .insert({folder_name}, ['id']);
+            .insert({folder_name}, ['*']);
     },
 
     updateFolder(db, id, folder_name) {
