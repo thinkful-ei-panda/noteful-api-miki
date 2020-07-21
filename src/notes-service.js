@@ -16,11 +16,11 @@ const NotesService = {
             .insert(newNote, ['id']);
     },
 
-    // updateNote(db, id, note_name) {
-    //     return db('note')
-    //         .where({id})
-    //         .update({note_name});
-    // },
+    updateNote(db, id, noteUpdate) {
+        return db('note')
+            .where({id})
+            .update(noteUpdate);
+    },
 
     deleteNote(db, id) {
         return db('note')

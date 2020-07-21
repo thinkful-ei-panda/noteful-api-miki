@@ -68,7 +68,6 @@ describe.only(`Notes Endpoints`, () => {
             it(`POST /api/notes responds with 201 and new note location`, () => {
                 const newNote = {
                     note_name: 'Sheep',
-                    note_content: 'Four legs good, two legs baaaaad',
                     folder_name: 3
                 };
 
@@ -86,34 +85,38 @@ describe.only(`Notes Endpoints`, () => {
         });
     });
 
-    // describe(`PATCH /api/folders/:folder_id`, () => {
-    //     context(`Given there are folders`, () => {
-    //         const testFoldersArray = makeFoldersArray();
-    //         beforeEach(`Insert folders`, () => db('folder').insert(testFoldersArray));
+    describe(`PATCH /api/notes/:note_id`, () => {
+        context(`Given there are notes`, () => {
+            const testFoldersArray = makeFoldersArray();
+            const testNotesArray = makeNotesArray();
+            beforeEach(`Insert folders`, () => db('folder').insert(testFoldersArray));
+            beforeEach(`Insert notes`, () => db('note').insert(testNotesArray));
 
-    //         it(`PATCH /api/folders/:folder_id responds with 204`, () => {
-    //             const folder_id = 1;
-    //             const folderNameUpdate = {
-    //                 folder_name: 'Pertinent'
-    //             };
+            it(`PATCH /api/notes/:note_id responds with 204`, () => {
+                const note_id = 1;
+                const noteContentUpdate = {
+                    note_name: 'Sheep',
+                    note_content: 'Four legs good, two legs baaaaad',
+                    folder_name: 3
+                };
     
-    //             return supertest(app)
-    //                 .patch(`/api/folders/${folder_id}`)
-    //                 .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-    //                 .send(folderNameUpdate)
-    //                 .expect(204)
-    //                 .then(res => {
-    //                     supertest(app)
-    //                         .get(`/api/folders/${folder_id}`)
-    //                         .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-    //                         .expect(200)
-    //                         .then(res => {
-    //                             expect(folderNameUpdate.folder_name).to.eql(res.body.folder_name);
-    //                         });
-    //                 });
-    //         });
-    //     });
-    // });
+                return supertest(app)
+                    .patch(`/api/notes/${note_id}`)
+                    .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+                    .send(noteContentUpdate)
+                    .expect(204)
+                    // .then(res => {
+                    //     supertest(app)
+                    //         .get(`/api/folders/${folder_id}`)
+                    //         .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+                    //         .expect(200)
+                    //         .then(res => {
+                    //             expect(folderNameUpdate.folder_name).to.eql(res.body.folder_name);
+                    //         });
+                    // });
+            });
+        });
+    });
 
     describe(`DELETE /api/notes/:note_id`, () => {
         context(`Given there are notes`, () => {

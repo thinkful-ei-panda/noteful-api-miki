@@ -70,24 +70,27 @@ notesRouter
         // Returns an object
         res.json(res.note);
     })
-    // .patch((req, res, next) => {
-    //     const knexInstance = req.app.get('db');
-    //     const folder_id = req.params.folder_id;
-    //     const { folder_name } = req.body;
+    .patch((req, res, next) => {
+        const knexInstance = req.app.get('db');
+        const note_id = req.params.note_id;
+        const { note_name, note_content, folder_name } = req.body;
+        const noteUpdate = { note_name, note_content, folder_name };
 
-    //     if(folder_name.length === 0) {
-    //         return res.status(400).send('Please enter a valid folder name');
-    //     };
-
-    //     FoldersService.updateFolder(knexInstance, folder_id, folder_name)
-    //         .then(folder => {
-    //             if(!folder) {
-    //                 return res.status(404).json({error: {message: 'Folder not found/does not exist'}});
-    //             };
-    //             res.status(204).end();
-    //         })
-    //         .catch(next);
-    // })
+        // From the checkpoint
+        const numberOfValues = Object.values(noteUpdate).filter(Boolean).length;
+        if(numberOfValues === 0) {
+            return res.status(400).json({error: {message: `Request body must contain either 'name', 'content', 'folder'`}});
+        };
+        
+        NotesService.updateNote(knexInstance, note_id, noteUpdate)
+            .then(note => {
+                if(!note) {
+                    return res.status(404).json({error: {message: 'Note not found/does not exist'}});
+                };
+                res.status(204).end();
+            })
+            .catch(next);
+    })
     .delete((req, res, next) => {
         const knexInstance = req.app.get('db');
         const note_id = req.params.note_id;

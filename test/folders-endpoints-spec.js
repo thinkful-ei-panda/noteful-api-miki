@@ -4,6 +4,7 @@ const { makeFoldersArray } = require('./noteful-fixtures');
 
 // Todo
 // Delete
+// ON DELETE CASCADE?
 
 describe(`Folders Endpoints`, () => {
     let db;
