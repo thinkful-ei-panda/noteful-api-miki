@@ -57,7 +57,6 @@ notesRouter
         const note_id = req.params.note_id;
         NotesService.getNoteByID(knexInstance, note_id)
             .then(note => {
-                console.log(note, 'Meow')
                 if(!note) {
                     return res.status(404).json({error: {message: 'Note not found/does not exist'}});
                 }

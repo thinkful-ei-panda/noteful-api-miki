@@ -112,7 +112,6 @@ describe.only(`Notes Endpoints`, () => {
                             .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
                             .expect(200)
                             .then(res => {
-                                console.log(res.body, 'Pipupipip')
                                 expect(noteContentUpdate.note_name).to.eql(res.body.note_name);
                                 expect(noteContentUpdate.note_name).to.eql(res.body.note_name);
                                 expect(noteContentUpdate.note_name).to.eql(res.body.note_name);
