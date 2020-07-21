@@ -2,9 +2,11 @@ const knex = require('knex');
 const app = require('../src/app');
 const { makeFoldersArray } = require('./noteful-fixtures');
 
-// Todo
-// Delete
-// ON DELETE CASCADE?
+// To do list
+// 1. Delete
+// 2. ON DELETE CASCADE?
+// 3. More thorough testing needed
+// 4. Address date
 
 describe(`Folders Endpoints`, () => {
     let db;

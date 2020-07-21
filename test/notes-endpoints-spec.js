@@ -1,6 +1,7 @@
 const knex = require('knex');
 const app = require('../src/app');
 const { makeFoldersArray, makeNotesArray } = require('./noteful-fixtures');
+const { expect } = require('chai');
 
 describe.only(`Notes Endpoints`, () => {
     let db;
@@ -105,15 +106,19 @@ describe.only(`Notes Endpoints`, () => {
                     .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
                     .send(noteContentUpdate)
                     .expect(204)
-                    // .then(res => {
-                    //     supertest(app)
-                    //         .get(`/api/folders/${folder_id}`)
-                    //         .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-                    //         .expect(200)
-                    //         .then(res => {
-                    //             expect(folderNameUpdate.folder_name).to.eql(res.body.folder_name);
-                    //         });
-                    // });
+                    .then(res => {
+                        supertest(app)
+                            .get(`/api/notes/${note_id}`)
+                            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+                            .expect(200)
+                            .then(res => {
+                                console.log(res.body, 'Pipupipip')
+                                expect(noteContentUpdate.note_name).to.eql(res.body.note_name);
+                                expect(noteContentUpdate.note_name).to.eql(res.body.note_name);
+                                expect(noteContentUpdate.note_name).to.eql(res.body.note_name);
+                                expect(res.body.id).to.exist;
+                            });
+                    });
             });
         });
     });
