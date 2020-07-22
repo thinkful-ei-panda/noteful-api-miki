@@ -31,8 +31,8 @@ const validateBearerToken = (req, res, next) => {
 };
 
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'https://noteful-app-silk.vercel.app'); // update to match the domain you will make the request from
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.headers('Access-Control-Allow-Origin', 'https://noteful-app-silk.vercel.app'); // update to match the domain you will make the request from
+    res.headers('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
   });
 app.use(validateBearerToken);
