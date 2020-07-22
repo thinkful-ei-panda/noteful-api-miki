@@ -15,6 +15,11 @@ notesRouter.use(jsonParser);
 
 notesRouter
     .route('/')
+    .all((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "https://noteful-app-silk.vercel.app");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next()
+    })
     .get((req, res, next) => {
         const knexInstance = req.app.get('db');
         NotesService.getAllNotes(knexInstance)
@@ -51,6 +56,11 @@ notesRouter
 
 notesRouter
     .route('/:note_id')
+    .all((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "https://noteful-app-silk.vercel.app");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next()
+    })
     .all((req, res, next) => {
         // Syntax!!!!!
         const knexInstance = req.app.get('db');

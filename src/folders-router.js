@@ -16,8 +16,8 @@ foldersRouter.use(jsonParser);
 foldersRouter
     .route('/')
     .all((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        res.header("Access-Control-Allow-Origin", "https://noteful-app-silk.vercel.app");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         next()
     })
     .get((req, res, next) => {
@@ -52,6 +52,11 @@ foldersRouter
 
 foldersRouter
     .route('/:folder_id')
+    .all((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "https://noteful-app-silk.vercel.app");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next()
+    })
     .all((req, res, next) => {
         // Syntax!!!!!
         const knexInstance = req.app.get('db');
